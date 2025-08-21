@@ -1,11 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import StackNavigator from "./Src/Navigation/StackNavigator/StackNavigator";
 
 const App = () => {
   return (
-    <View>
-      <Text> Welcome Go Build</Text>
-    </View>
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   )
 }
 
