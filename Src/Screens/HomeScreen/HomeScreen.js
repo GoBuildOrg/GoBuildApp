@@ -1,12 +1,25 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import Header from "../../Components/Header/Header";
+import Categories from "../../Components/categories/Categories";
+import SearchBar from "../../Components/SearchBar/SearchBar";
+import ServiceCard from "../../Components/ServiceCard/ServiceCard"
 
 const HomeScreen = () => {
     return (
-        <View>
-            <Text>Welcome to Home Screen</Text>
+        <View style={style.Container}>
+            <Header />
+            <SearchBar />
+            <Categories />
+            <ServiceCard />
         </View>
     )
 }
 
+const style = StyleSheet.create({
+    Container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF'
+    }
+})
 export default HomeScreen;
