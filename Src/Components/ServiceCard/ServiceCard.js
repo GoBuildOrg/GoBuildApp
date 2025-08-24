@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: "#f9f9f9",
-        top: 40
+        top: 40,
+        marginBottom: 30
     },
 
     card: {
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     imageBackground: {
-        height: 250,
+        height: 300,
         justifyContent: "flex-end",
     },
 

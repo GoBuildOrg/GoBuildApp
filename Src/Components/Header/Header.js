@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: "#ccc",
+      
     },
 
     left: { width: 48, alignItems: "flex-start", justifyContent: "center" },
