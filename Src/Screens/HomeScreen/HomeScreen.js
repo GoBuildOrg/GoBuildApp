@@ -6,6 +6,9 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 import ServiceCard from "../../Components/ServiceCard/ServiceCard"
 import ProfessionalService from "../../Components/ProfessionalServices/ProfessionalServices";
 import WorkerService from "../../Components/WorkerServices/WorkerServices";
+import WorkSteps from "../../Components/WorkSteps/WorkSteps";
+import FAQScreen from "../../Components/FAQ/FAQ";
+import Footer from "../../Components/Footer/Footer";
 
 const HomeScreen = () => {
     return (
@@ -21,6 +24,10 @@ const HomeScreen = () => {
                 <ServiceCard />
                 <ProfessionalService />
                 <WorkerService />
+                <WorkSteps />
+                <FAQScreen />
+                {/* <Footer/> */}
+
             </ScrollView>
         </SafeAreaView>
     )

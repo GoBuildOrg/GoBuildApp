@@ -207,7 +207,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 15,
-        top: 20
+        top: 30,
+        marginBottom: 50
     },
 
     seeAllText: {
