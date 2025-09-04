@@ -182,7 +182,7 @@ const AvailableServices = () => {
                         setSelectedCardId={setSelectedCardId}
                     />
                 )}
-                contentContainerStyle={{ paddingBottom: 30 }} // 👈 thoda space bottom me
+                contentContainerStyle={{ paddingBottom: 30 }}
             />
         </SafeAreaView>
     );
@@ -260,33 +260,40 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
+
     rating: {
         fontSize: 14,
         color: "#000",
     },
+
     reviews: {
         fontSize: 14,
         color: Colors.mutedForeground,
     },
+
     description: {
         fontSize: 14,
         color: "#64748b",
         marginBottom: 10,
         lineHeight: 20,
     },
+
     availableRow: {
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 20,
     },
+
     available: {
         fontSize: 14,
         color: "#64748b",
     },
+
     buttonRow: {
         flexDirection: "row",
         justifyContent: "space-between",
     },
+
     viewButton: {
         flex: 1,
         borderWidth: 1,
@@ -296,17 +303,21 @@ const styles = StyleSheet.create({
         marginRight: 8,
         alignItems: "center",
     },
+
     activeViewButton: {
         backgroundColor: "#009688",
         borderColor: "#009688",
     },
+
     viewText: {
         color: "#000",
         fontWeight: "600",
     },
+
     activeViewText: {
         color: "#fff",
     },
+
     bookButton: {
         flex: 1,
         backgroundColor: "#007bff",
@@ -314,6 +325,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         alignItems: "center",
     },
+
     bookText: {
         color: "#fff",
         fontWeight: "600",
