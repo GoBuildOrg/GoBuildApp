@@ -8,6 +8,7 @@ import ProfessionalService from "../../Components/ProfessionalServices/Professio
 import WorkerService from "../../Components/WorkerServices/WorkerServices";
 import WorkSteps from "../../Components/WorkSteps/WorkSteps";
 import FAQScreen from "../../Components/FAQ/FAQ";
+import Footer from "../../Components/Footer/Footer";
 
 const HomeScreen = () => {
     return (
@@ -25,6 +26,7 @@ const HomeScreen = () => {
                 <WorkerService />
                 <WorkSteps />
                 <FAQScreen />
+                <Footer />
             </ScrollView>
         </SafeAreaView>
     )

@@ -4,6 +4,7 @@ import ProfessionalService from "../../Components/ProfessionalServices/Professio
 import Header from "../../Components/Header/Header";
 import ApplyAsProfessional from "../../Components/ApplyAsProfessional/Form";
 import AvailableServices from "../../Components/AvailableServices/AvailableServices";
+import Footer from "../../Components/Footer/Footer";
 
 const ServiceScreen = () => {
     return (
@@ -17,6 +18,7 @@ const ServiceScreen = () => {
                 <ProfessionalService />
                 <ApplyAsProfessional />
                 <AvailableServices />
+                <Footer />
             </ScrollView>
         </SafeAreaView>
     );

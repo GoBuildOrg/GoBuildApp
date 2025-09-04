@@ -98,8 +98,7 @@ const FAQScreen = () => {
                     <Text style={styles.supportButtonText}>Contact Support</Text>
                 </TouchableOpacity>
 
-
-                <View style={styles.footer}>
+                {/* <View style={styles.footer}>
 
                     <View style={styles.footerLine} />
 
@@ -119,8 +118,7 @@ const FAQScreen = () => {
                     </View>
 
                     <Text style={styles.footerTextSecond}>© 2025 GoBuild. All rights reserved.</Text>
-                </View>
-
+                </View> */}
 
             </ScrollView>
         </SafeAreaView>
@@ -221,7 +219,7 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         borderRadius: 8,
         alignItems: "center",
-        marginBottom: 20,
+        marginBottom: 60,
         width: '50%',
         alignSelf: 'center',
     },
@@ -231,39 +229,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "600",
     },
-
-    socialIcons: {
-        flexDirection: "row",
-        justifyContent: "center",
-        marginVertical: 10,
-    },
-
-    iconButton: {
-        marginHorizontal: 10,
-    },
-
-    footer: {
-        paddingVertical: 20,
-        alignItems: "center",
-        backgroundColor: "#f9fafb",
-        marginBottom: 20
-    },
-
-    footerLine: {
-        width: "90%",
-        height: 1,
-        backgroundColor: "#d1d5db",
-        marginBottom: 10,
-    },
-
-    footerTextSecond: {
-        textAlign: "center",
-        fontSize: 14,
-        color: "#9ca3af",
-        marginVertical: 20,
-        fontWeight: "600",
-        lineHeight: 20
-    }
 
 });
 

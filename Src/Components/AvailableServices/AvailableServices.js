@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../../Assets/Colors/Color";
+import { useNavigation } from "@react-navigation/native";
 
 const services = [
     {
@@ -74,7 +75,8 @@ const services = [
     },
 ];
 
-const ServiceCard = ({ item, selectedCardId, setSelectedCardId }) => (
+const ServiceCard = ({ item, selectedCardId, setSelectedCardId, navigation }) => (
+
     <View style={styles.card}>
         <Image source={item.image} style={styles.image} />
         <View style={styles.content}>
@@ -107,8 +109,14 @@ const ServiceCard = ({ item, selectedCardId, setSelectedCardId }) => (
                         styles.viewButton,
                         selectedCardId === item.id && styles.activeViewButton,
                     ]}
-                    onPress={() => setSelectedCardId(item.id)}
+
+                    onPress={() => {
+                        setSelectedCardId(item.id);
+                        navigation.navigate("Professional");
+                    }}
+
                 >
+
                     <Text
                         style={[
                             styles.viewText,
@@ -119,7 +127,8 @@ const ServiceCard = ({ item, selectedCardId, setSelectedCardId }) => (
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.bookButton}>
+                <TouchableOpacity style={styles.bookButton}
+                    onPress={() => navigation.navigate("Professional")}>
                     <Text style={styles.bookText}>Book Now</Text>
                 </TouchableOpacity>
             </View>
@@ -128,6 +137,8 @@ const ServiceCard = ({ item, selectedCardId, setSelectedCardId }) => (
 );
 
 const AvailableServices = () => {
+
+    const navigation = useNavigation();
     const [selectedFilter, setSelectedFilter] = useState("All Services");
     const [selectedCardId, setSelectedCardId] = useState(null);
 
@@ -180,9 +191,10 @@ const AvailableServices = () => {
                         item={item}
                         selectedCardId={selectedCardId}
                         setSelectedCardId={setSelectedCardId}
+                        navigation={navigation}
                     />
                 )}
-                contentContainerStyle={{ paddingBottom: 30 }}
+                contentContainerStyle={{ paddingBottom: 20 }}
             />
         </SafeAreaView>
     );

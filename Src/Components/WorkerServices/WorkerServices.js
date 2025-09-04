@@ -104,7 +104,7 @@ const WorkerService = () => {
 
                 <TouchableOpacity
                     style={styles.seeAllBtn}
-                    onPress={() => navigation.navigate("AllServices")}
+                    onPress={() => navigation.navigate("Service")}
                 >
                     <Text style={styles.seeAllText}>See All Services</Text>
                 </TouchableOpacity>
