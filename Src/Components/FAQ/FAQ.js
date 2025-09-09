@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const faqData = [
     {
@@ -50,6 +51,8 @@ const FAQScreen = () => {
     const toggleExpand = (index) => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
+
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -94,31 +97,11 @@ const FAQScreen = () => {
                 <Text style={styles.footerText}>
                     Still have questions? We’re here to help!
                 </Text>
-                <TouchableOpacity style={styles.supportButton}>
+                <TouchableOpacity style={styles.supportButton}
+                    onPress={() => navigation.navigate("Contact")}>
                     <Text style={styles.supportButtonText}>Contact Support</Text>
                 </TouchableOpacity>
 
-                {/* <View style={styles.footer}>
-
-                    <View style={styles.footerLine} />
-
-                    <View style={styles.socialIcons}>
-                        <TouchableOpacity style={styles.iconButton}>
-                            <FontAwesome name="facebook-square" size={28} color="#1877F2" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconButton}>
-                            <FontAwesome name="instagram" size={28} color="#C13584" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconButton}>
-                            <FontAwesome name="linkedin-square" size={28} color="#0A66C2" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconButton}>
-                            <FontAwesome name="twitter-square" size={28} color="#1DA1F2" />
-                        </TouchableOpacity>
-                    </View>
-
-                    <Text style={styles.footerTextSecond}>© 2025 GoBuild. All rights reserved.</Text>
-                </View> */}
 
             </ScrollView>
         </SafeAreaView>

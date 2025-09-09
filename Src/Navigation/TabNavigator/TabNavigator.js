@@ -7,7 +7,7 @@ import ProfileScreen from "../../Screens/ProfileScreen/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+export default function TabNavigator({ navigation }) {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -40,7 +40,17 @@ export default function TabNavigator() {
         >
             <Tab.Screen name="Home" component={HomeScreen} options={{ title: "Home" }} />
             <Tab.Screen name="Service" component={ServiceScreen} options={{ title: "Services" }} />
-            <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: "Profile" }} />
+            <Tab.Screen
+                name="Profile"
+                component={HomeScreen}
+                listeners={{
+                    tabPress: (e) => {
+                        e.preventDefault();
+                        navigation.openDrawer();
+                    },
+                }}
+                options={{ title: "Profile" }}
+            />
         </Tab.Navigator>
     );
 }
