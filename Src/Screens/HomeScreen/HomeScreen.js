@@ -9,8 +9,10 @@ import WorkerService from "../../Components/WorkerServices/WorkerServices";
 import WorkSteps from "../../Components/WorkSteps/WorkSteps";
 import FAQScreen from "../../Components/FAQ/FAQ";
 import Footer from "../../Components/Footer/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={style.safeArea}>
             <Header />

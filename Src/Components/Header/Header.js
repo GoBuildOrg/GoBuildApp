@@ -1,30 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import { useNavigation } from "@react-navigation/native";
 
-class Header extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.left} onPress={this.props.onMenuPress}>
-                    <Icon name="menu" size={26} color="#000" />
-                </TouchableOpacity>
+export default function Header() {
+    const navigation = useNavigation();
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => navigation.toggleDrawer()}
+                style={styles.left}
 
-                <View style={styles.Logo}>
-                    <Text style={styles.title}>
-                        <Text style={styles.titleFirst}>Go</Text>
-                        <Text style={styles.titleSecond}>Build</Text>
-                    </Text>
-                </View>
+            >
+                <Icon name="menu" size={26} color="#000" />
+            </TouchableOpacity>
 
-                <View style={styles.right} />
+            <View style={styles.Logo}>
+                <Text style={styles.title}>
+                    <Text style={styles.titleFirst}>Go</Text>
+                    <Text style={styles.titleSecond}>Build</Text>
+                </Text>
             </View>
-        );
-    }
+
+            <View style={styles.right} />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-
     container: {
         height: 56,
         paddingHorizontal: 12,
@@ -33,15 +36,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: "#ccc",
-
     },
-
     left: { width: 48, alignItems: "flex-start", justifyContent: "center" },
-    right:
-    {
-        width: 48
-    },
-
+    right: { width: 48 },
     Logo: {
         position: "absolute",
         left: 0,
@@ -49,22 +46,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-
-    title: {
-        fontSize: 24,
-        fontWeight: "900",
-        letterSpacing: 1,
-    },
-
-    titleFirst: {
-        color: "#007BFF",
-
-    },
-
-    titleSecond: {
-        color: "#05C3DD",
-    }
-
+    title: { fontSize: 24, fontWeight: "900", letterSpacing: 1 },
+    titleFirst: { color: "#007BFF" },
+    titleSecond: { color: "#05C3DD" },
 });
-
-export default Header;
