@@ -1,33 +1,39 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Header() {
     const navigation = useNavigation();
     return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => navigation.toggleDrawer()}
-                style={styles.left}
+        <SafeAreaView style={styles.safeArea}>
+            <View style={styles.container}>
+                <TouchableOpacity
+                    onPress={() => navigation.toggleDrawer()}
+                    style={styles.left}
+                >
+                    <Icon name="menu" size={26} color="#000" />
+                </TouchableOpacity>
 
-            >
-                <Icon name="menu" size={26} color="#000" />
-            </TouchableOpacity>
+                <View style={styles.Logo}>
+                    <Text style={styles.title}>
+                        <Text style={styles.titleFirst}>Go</Text>
+                        <Text style={styles.titleSecond}>Build</Text>
+                    </Text>
+                </View>
 
-            <View style={styles.Logo}>
-                <Text style={styles.title}>
-                    <Text style={styles.titleFirst}>Go</Text>
-                    <Text style={styles.titleSecond}>Build</Text>
-                </Text>
+                <View style={styles.right} />
             </View>
-
-            <View style={styles.right} />
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+
+    safeArea: {
+        backgroundColor: "#fff",
+    },
+
     container: {
         height: 56,
         paddingHorizontal: 12,
@@ -37,8 +43,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: "#ccc",
     },
-    left: { width: 48, alignItems: "flex-start", justifyContent: "center" },
-    right: { width: 48 },
+
+    left: {
+        width: 48,
+        alignItems: "flex-start",
+        justifyContent: "center"
+    },
+
+    right: {
+        width: 48
+    },
+
     Logo: {
         position: "absolute",
         left: 0,
@@ -46,7 +61,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    title: { fontSize: 24, fontWeight: "900", letterSpacing: 1 },
-    titleFirst: { color: "#007BFF" },
-    titleSecond: { color: "#05C3DD" },
+
+    title: {
+        fontSize: 24,
+        fontWeight: "900",
+        letterSpacing: 1
+    },
+
+    titleFirst: {
+        color: "#007BFF"
+    },
+
+    titleSecond: {
+        color: "#05C3DD"
+    },
+
 });

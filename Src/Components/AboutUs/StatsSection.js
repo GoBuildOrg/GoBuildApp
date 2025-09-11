@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 
 const StatsSection = () => {
     return (
-        <>
+        <SafeAreaView style={styles.safeArea}>
             <View style={styles.statsContainer}>
                 <View style={styles.statCard}>
                     <Text style={styles.statNumber}>1000+</Text>
@@ -25,16 +25,22 @@ const StatsSection = () => {
                     <Text style={styles.statLabel}>Average Rating</Text>
                 </View>
             </View>
-        </>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
 
+    safeArea: {
+        flex: 1,
+        backgroundColor: "#fff",
+        top: 10
+    },
+
     statsContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: 15
+        padding: 15,
     },
 
     statCard: {
