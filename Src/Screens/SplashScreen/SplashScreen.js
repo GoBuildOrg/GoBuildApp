@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Image, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
@@ -10,17 +11,23 @@ const SplashScreen = ({ navigation }) => {
     }, [navigation]);
 
     return (
-        <View style={styles.container}>
-            <Image
-                source={require("../../Assets/Logo/GoBuild_Logo1_nobg.png")}
-                style={styles.logo}
-                resizeMode="contain"
-            />
-        </View>
+        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+            <View style={styles.container}>
+                <Image
+                    source={require("../../Assets/Logo/GoBuild_Logo1_nobg.png")}
+                    style={styles.logo}
+                    resizeMode="contain"
+                />
+            </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: "#ffffff",
+    },
     container: {
         flex: 1,
         backgroundColor: "#ffffff",

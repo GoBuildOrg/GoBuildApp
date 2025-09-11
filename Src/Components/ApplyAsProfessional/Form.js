@@ -7,9 +7,9 @@ import {
     ScrollView,
     StyleSheet,
     Alert,
-    SafeAreaView,
     Image
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "../../Assets/Colors/Color";
 
 const ApplyAsProfessional = () => {
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: "#fff",
-        top: 50
     },
 
     container: {

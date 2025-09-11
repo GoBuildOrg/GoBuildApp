@@ -7,9 +7,9 @@ import {
     StyleSheet,
     Dimensions,
     ScrollView,
-    SafeAreaView,
     Alert,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,7 +29,7 @@ const OnBoardingScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#F9FAFB" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#F9FAFB" }} edges={['top', 'left', 'right']}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
                 <View style={styles.container}>
                     {/* Logo */}

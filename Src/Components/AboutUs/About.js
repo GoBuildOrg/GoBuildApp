@@ -8,14 +8,13 @@ import {
     Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Colors } from "../../Assets/Colors/Color";
 
 const About = () => {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
+        <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
             <ScrollView
                 contentContainerStyle={styles.container}
                 showsVerticalScrollIndicator={false}>
@@ -64,7 +63,7 @@ const About = () => {
                     </View>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 };
 

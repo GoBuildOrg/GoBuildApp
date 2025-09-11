@@ -1,5 +1,6 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import ProfessionalService from "../../Components/ProfessionalServices/ProfessionalServices";
 import Header from "../../Components/Header/Header";
 import ApplyAsProfessional from "../../Components/ApplyAsProfessional/Form";
@@ -8,7 +9,7 @@ import Footer from "../../Components/Footer/Footer";
 
 const ServiceScreen = () => {
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
             <Header />
             <ScrollView
                 style={styles.scrollContainer}

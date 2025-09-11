@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../Components/Header/Header";
 import Categories from "../../Components/categories/Categories";
 import SearchBar from "../../Components/SearchBar/SearchBar";
@@ -14,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 const HomeScreen = () => {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={style.safeArea}>
+        <SafeAreaView style={style.safeArea} edges={['top', 'left', 'right']}>
             <Header />
             <ScrollView
                 style={style.scrollContainer}

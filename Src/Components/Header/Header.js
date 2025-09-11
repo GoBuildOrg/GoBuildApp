@@ -1,39 +1,32 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Header() {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={() => navigation.toggleDrawer()}
-                    style={styles.left}
-                >
-                    <Icon name="menu" size={26} color="#000" />
-                </TouchableOpacity>
+        <View style={styles.container}>
+            <TouchableOpacity
+                onPress={() => navigation.toggleDrawer()}
+                style={styles.left}
+            >
+                <Icon name="menu" size={26} color="#000" />
+            </TouchableOpacity>
 
-                <View style={styles.Logo}>
-                    <Text style={styles.title}>
-                        <Text style={styles.titleFirst}>Go</Text>
-                        <Text style={styles.titleSecond}>Build</Text>
-                    </Text>
-                </View>
-
-                <View style={styles.right} />
+            <View style={styles.Logo}>
+                <Text style={styles.title}>
+                    <Text style={styles.titleFirst}>Go</Text>
+                    <Text style={styles.titleSecond}>Build</Text>
+                </Text>
             </View>
-        </SafeAreaView>
+
+            <View style={styles.right} />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-
-    safeArea: {
-        backgroundColor: "#fff",
-    },
-
     container: {
         height: 56,
         paddingHorizontal: 12,
