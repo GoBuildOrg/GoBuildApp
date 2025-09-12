@@ -12,6 +12,8 @@ import {
     Alert
 } from "react-native";
 
+import { supabase } from "../../integrations/supabase/client"
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -88,6 +90,19 @@ const ProfessionalService = () => {
         item.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    // fetching the data from supabase
+    async function fetchData() {
+        console.log('fetchData called');
+        const { data, error } = await supabase.from('profiles').select('*');
+        if (error) {
+            console.error('Error:', error);
+            Alert.alert("Error", error.message || "Something went wrong");
+        } else {
+            console.log('Data:', data);
+            Alert.alert("Success", `Found ${data.length} profiles`);
+        }
+    }
+
     const handleSubmit = () => {
         if (!date) {
             Alert.alert("Validation Error", "Please select a date.");
@@ -110,10 +125,13 @@ const ProfessionalService = () => {
             return;
         }
 
-        Alert.alert(
-            "      Booking Successfully",
-            "We will connect you in 15 minutes via Phone or SMS."
-        );
+        // Alert.alert(
+        //     "      Booking Successfully",
+        //     "We will connect you in 15 minutes via Phone or SMS."
+        // );
+
+        fetchData();
+        
         setDate(new Date());
         setLocation("");
         setPhone("");
