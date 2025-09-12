@@ -40,7 +40,7 @@ const About = () => {
                         business and showcase their expertise.
                     </Text>
                 </View>
-
+                {/* Button */}
                 <TouchableOpacity
                     style={styles.contactButton}
                     onPress={() => navigation.navigate("Contact")}
