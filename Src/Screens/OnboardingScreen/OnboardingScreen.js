@@ -10,27 +10,77 @@ import {
     Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { supabase } from "../../integrations/supabase/client";
 
 const { width, height } = Dimensions.get("window");
 
 const OnBoardingScreen = ({ navigation }) => {
     const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [nameFocused, setNameFocused] = useState(false);
-    const [phoneFocused, setPhoneFocused] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const handleRegister = () => {
-        if (!name || !phone) {
-            Alert.alert("Error", "Please enter your Name and Phone");
+    const [focused, setFocused] = useState({
+        name: false,
+        email: false,
+        password: false,
+    });
+
+    const handleRegister = async () => {
+        if (!name || !email || !password) {
+            Alert.alert("Error", "Please fill all fields");
             return;
         }
-        Alert.alert("Success", "Registration completed!");
-        navigation.replace("Home");
+
+        try {
+            // 1. SignUp user
+            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+                email,
+                password,
+            });
+
+            if (signUpError) {
+                console.log("Auth SignUp Error:", signUpError);
+                Alert.alert("Error", signUpError.message);
+                return;
+            }
+
+            const user = signUpData?.user;
+            if (!user) {
+                Alert.alert("Error", "User not created. Try again!");
+                return;
+            }
+
+            // 2. Update profile
+            const { error: profileError } = await supabase
+                .from("profiles")
+                .update({
+                    full_name: name,
+                })
+                .eq("id", user.id);
+
+            if (profileError) {
+                console.log("Profile Update Error:", profileError);
+                Alert.alert("Error", "Profile not updated!");
+                return;
+            }
+
+            Alert.alert("Success", "Registration completed!");
+            navigation.replace("Home");
+        } catch (err) {
+            console.log("Unexpected Error:", err);
+            Alert.alert("Error", "Something went wrong!");
+        }
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#F9FAFB" }} edges={['top', 'left', 'right']}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+        <SafeAreaView
+            style={{ flex: 1, backgroundColor: "#F9FAFB" }}
+            edges={["top", "left", "right"]}
+        >
+            <ScrollView
+                contentContainerStyle={{ flexGrow: 1 }}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.container}>
                     {/* Logo */}
                     <Text style={styles.logo}>
@@ -42,25 +92,38 @@ const OnBoardingScreen = ({ navigation }) => {
                     <View style={styles.formCard}>
                         <Text style={styles.formLabel}>Full Name</Text>
                         <TextInput
-                            style={[styles.input, nameFocused && styles.inputFocused]}
+                            style={[styles.input, focused.name && styles.inputFocused]}
                             placeholder="Enter your Name"
                             placeholderTextColor="#9CA3AF"
                             value={name}
                             onChangeText={setName}
-                            onFocus={() => setNameFocused(true)}
-                            onBlur={() => setNameFocused(false)}
+                            onFocus={() => setFocused({ ...focused, name: true })}
+                            onBlur={() => setFocused({ ...focused, name: false })}
                         />
 
-                        <Text style={styles.formLabel}>Phone Number</Text>
+                        <Text style={styles.formLabel}>Email</Text>
                         <TextInput
-                            style={[styles.input, phoneFocused && styles.inputFocused]}
-                            placeholder="Enter your Phone"
+                            style={[styles.input, focused.email && styles.inputFocused]}
+                            placeholder="Enter your Email"
                             placeholderTextColor="#9CA3AF"
-                            value={phone}
-                            keyboardType="phone-pad"
-                            onChangeText={setPhone}
-                            onFocus={() => setPhoneFocused(true)}
-                            onBlur={() => setPhoneFocused(false)}
+                            value={email}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            onChangeText={setEmail}
+                            onFocus={() => setFocused({ ...focused, email: true })}
+                            onBlur={() => setFocused({ ...focused, email: false })}
+                        />
+
+                        <Text style={styles.formLabel}>Password</Text>
+                        <TextInput
+                            style={[styles.input, focused.password && styles.inputFocused]}
+                            placeholder="Enter your Password"
+                            placeholderTextColor="#9CA3AF"
+                            value={password}
+                            secureTextEntry
+                            onChangeText={setPassword}
+                            onFocus={() => setFocused({ ...focused, password: true })}
+                            onBlur={() => setFocused({ ...focused, password: false })}
                         />
 
                         {/* Buttons */}
@@ -72,7 +135,9 @@ const OnBoardingScreen = ({ navigation }) => {
                             style={[styles.button, styles.secondaryButton]}
                             onPress={() => navigation.replace("Home")}
                         >
-                            <Text style={[styles.buttonText, { color: "#2563EB" }]}>Join Now</Text>
+                            <Text style={[styles.buttonText, { color: "#2563EB" }]}>
+                                Join Now
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -127,7 +192,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 15,
         fontSize: 14,
-        borderColor: "#E5E7EB",
     },
 
     inputFocused: {
@@ -161,4 +225,5 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderColor: "#2563EB",
     },
+
 });

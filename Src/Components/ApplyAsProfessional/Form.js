@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "../../Assets/Colors/Color";
+import { supabase } from "../../integrations/supabase/client";
+
 
 const ApplyAsProfessional = () => {
     const [form, setForm] = useState({
@@ -70,10 +72,45 @@ const ApplyAsProfessional = () => {
         return valid;
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (validate()) {
-            console.log("Form Data:", form);
-            Alert.alert("Success", "Form Submitted!");
+            try {
+                const { data, error } = await supabase
+                    .from("GoBuild")
+                    .insert([
+                        {
+                            Age: form.age,
+                            Name: form.fullName,
+                            Experience: parseInt(form.experience, 10),
+                            MobileNo: form.mobile,
+                            Area: form.location,
+                            Skill: form.skill,
+                            Description: form.description,
+                            created_at: new Date().toISOString(),
+                        },
+                    ]);
+
+                if (error) {
+                    console.error("Insert error:", error);
+                    Alert.alert("Error", error.message || "Something went wrong");
+                } else {
+                    console.log("Inserted:", data);
+                    Alert.alert("Success", "Application submitted!");
+                    // reset form
+                    setForm({
+                        fullName: "",
+                        age: "",
+                        experience: "",
+                        mobile: "",
+                        location: "",
+                        skill: "",
+                        description: "",
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+                Alert.alert("Error", "Unexpected error occurred");
+            }
         }
     };
 

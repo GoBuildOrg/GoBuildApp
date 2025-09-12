@@ -90,20 +90,7 @@ const ProfessionalService = () => {
         item.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // fetching the data from supabase
-    async function fetchData() {
-        console.log('fetchData called');
-        const { data, error } = await supabase.from('profiles').select('*');
-        if (error) {
-            console.error('Error:', error);
-            Alert.alert("Error", error.message || "Something went wrong");
-        } else {
-            console.log('Data:', data);
-            Alert.alert("Success", `Found ${data.length} profiles`);
-        }
-    }
-
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!date) {
             Alert.alert("Validation Error", "Please select a date.");
             return;
@@ -125,13 +112,30 @@ const ProfessionalService = () => {
             return;
         }
 
-        // Alert.alert(
-        //     "      Booking Successfully",
-        //     "We will connect you in 15 minutes via Phone or SMS."
-        // );
+        // Insert into Supabase
+        const { data, error } = await supabase
+            .from("User Request")
+            .insert([
+                {
+                    Name: "User",
+                    Location: location,
+                    ServiceType: serviceType,
+                    Phone: phone,
+                    DateOfService: date.toISOString().split("T")[0],
+                    hdfu: findUs,
 
-        fetchData();
-        
+                },
+            ]);
+
+        if (error) {
+            console.error("Insert error:", error);
+            Alert.alert("Error", error.message || "Failed to save data");
+        } else {
+            console.log("Inserted:", data);
+            Alert.alert("Success", "Booking saved successfully!");
+        }
+
+        // reset form
         setDate(new Date());
         setLocation("");
         setPhone("");
