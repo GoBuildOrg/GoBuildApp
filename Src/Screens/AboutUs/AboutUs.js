@@ -16,7 +16,7 @@ const AboutScreen = () => {
                 style={{ flex: 1, backgroundColor: "#FFFFFF" }} >
                 <About />
                 <OurValues />
-                <AboutContent />
+                {/* <AboutContent /> */}
                 <Footer />
             </ScrollView>
         </SafeAreaView>

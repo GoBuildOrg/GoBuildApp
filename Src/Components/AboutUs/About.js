@@ -19,12 +19,11 @@ const About = () => {
                 contentContainerStyle={styles.container}
                 showsVerticalScrollIndicator={false}>
                 <View style={styles.section}>
-                    <Text style={styles.sectionHeadingCenter}>About GoBuild</Text>
-                    <Text style={styles.sectionContentCenter}>
-                        We connect skilled professionals with customers who need quality
-                        services. Our platform makes it easy to find, book, and manage
-                        service providers for all needs.
-                    </Text>
+                    <Image
+                        source={require("../../Assets/Images/aboutUsImage.png")}
+                        style={styles.logoImage}
+                        resizeMode="contain"
+                    />
                 </View>
 
                 <View style={styles.section}>
