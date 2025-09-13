@@ -7,7 +7,6 @@ import { supabase } from "../../integrations/supabase/client";
 
 export default function CustomDrawer(props) {
     const [userName, setUserName] = useState("");
-    const [phoneNo, setPhoneNo] = useState("");
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -18,7 +17,7 @@ export default function CustomDrawer(props) {
 
             const { data, error } = await supabase
                 .from("profiles")
-                .select("full_name, PhoneNo")
+                .select("full_name")
                 .eq("id", user.id)
                 .single();
 
@@ -28,7 +27,6 @@ export default function CustomDrawer(props) {
             }
 
             setUserName(data?.full_name || "");
-            setPhoneNo(data?.PhoneNo || "");
         };
 
         fetchProfile();
@@ -50,7 +48,6 @@ export default function CustomDrawer(props) {
                         }}
                     />
                     <Text style={styles.name}>{userName || "User"}</Text>
-                    <Text style={styles.phone}>{phoneNo || "No Phone"}</Text>
                 </View>
 
                 <View style={styles.divider} />
