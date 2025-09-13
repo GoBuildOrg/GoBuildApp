@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Avatar } from "react-native-elements";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { supabase } from "../../integrations/supabase/client";
 
 export default function CustomDrawer(props) {
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) return;
+
+            const { data, error } = await supabase
+                .from("profiles")
+                .select("full_name")
+                .eq("id", user.id)
+                .single();
+
+            if (error) {
+                console.log("Profile Fetch Error:", error);
+                return;
+            }
+
+            setUserName(data?.full_name || "");
+        };
+
+        fetchProfile();
+    }, []);
+
     return (
         <DrawerContentScrollView
             {...props}
@@ -18,8 +43,7 @@ export default function CustomDrawer(props) {
                         size={70}
                         source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
                     />
-                    <Text style={styles.name}>Murtaza Ahmed</Text>
-                    <Text style={styles.phone}>+91 1234567890</Text>
+                    <Text style={styles.name}>{userName || "User"}</Text>
                 </View>
 
                 <View style={styles.divider} />
@@ -48,7 +72,6 @@ export default function CustomDrawer(props) {
             <TouchableOpacity
                 style={styles.logoutContainer}
                 onPress={() => {
-
                     props.navigation.reset({
                         index: 0,
                         routes: [{ name: "onBoarding" }],
@@ -58,8 +81,6 @@ export default function CustomDrawer(props) {
                 <Ionicons name="exit-outline" size={22} color="#FF4D4D" style={styles.icon} />
                 <Text style={[styles.menuText, { color: "#FF4D4D" }]}>Logout</Text>
             </TouchableOpacity>
-
-
         </DrawerContentScrollView>
     );
 }
@@ -76,12 +97,6 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         marginTop: 10,
         color: "#333",
-    },
-
-    phone: {
-        fontSize: 14,
-        color: "#666",
-        marginTop: 4,
     },
 
     divider: {

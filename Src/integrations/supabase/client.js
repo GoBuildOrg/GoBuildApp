@@ -1,4 +1,3 @@
-// setting up the supabase client to be used in other files
 
 import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
