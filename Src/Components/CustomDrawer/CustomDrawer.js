@@ -56,6 +56,18 @@ export default function CustomDrawer(props) {
                 <View style={styles.menuContainer}>
                     <TouchableOpacity
                         style={styles.menuItem}
+                        onPress={() => props.navigation.navigate("HomeTabs", { screen: "Home" })}
+                    >
+                        <Ionicons
+                            name="home-outline"
+                            size={22}
+                            color="#05C3DD"
+                            style={styles.icon}
+                        />
+                        <Text style={styles.menuText}>Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.menuItem}
                         onPress={() => props.navigation.navigate("Contact")}
                     >
                         <Ionicons

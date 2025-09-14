@@ -15,10 +15,12 @@ export default function Header() {
             </TouchableOpacity>
 
             <View style={styles.Logo}>
-                <Text style={styles.title}>
-                    <Text style={styles.titleFirst}>Go</Text>
-                    <Text style={styles.titleSecond}>Build</Text>
-                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('HomeTabs', { screen: 'Home' })}>
+                    <Text style={styles.title}>
+                        <Text style={styles.titleFirst}>Go</Text>
+                        <Text style={styles.titleSecond}>Build</Text>
+                    </Text>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.right} />
