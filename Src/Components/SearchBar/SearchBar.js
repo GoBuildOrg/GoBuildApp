@@ -8,13 +8,18 @@ import {
     Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native"; // ✅ navigation ke liye
 
 const SearchBar = () => {
     const [query, setQuery] = useState("");
     const [isFocused, setIsFocused] = useState(false);
+    const navigation = useNavigation(); // ✅ navigation hook
 
     const handleSearch = () => {
-        console.log("Search:", query);
+        if (query.trim().length > 0) {
+            console.log("Search:", query);
+            navigation.navigate("Service", { searchQuery: query }); // ✅ Service screen par jao
+        }
     };
 
     return (

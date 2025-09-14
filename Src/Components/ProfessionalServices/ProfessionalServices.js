@@ -86,9 +86,13 @@ const ProfessionalService = () => {
         return [];
     };
 
-    const filteredData = getDataForModal().filter((item) =>
+    let filteredData = getDataForModal().filter((item) =>
         item.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    if (modalType === "location" && filteredData.length === 0) {
+        filteredData = ["Anywhere in Jammu"];
+    }
 
     const handleSubmit = async () => {
         if (!date) {

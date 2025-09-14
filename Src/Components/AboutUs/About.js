@@ -18,7 +18,7 @@ const About = () => {
             <ScrollView
                 contentContainerStyle={styles.container}
                 showsVerticalScrollIndicator={false}>
-                <View style={styles.section}>
+                <View style={styles.missionSection}>
                     <Image
                         source={require("../../Assets/Images/aboutUsImage.png")}
                         style={styles.logoImage}
@@ -39,6 +39,16 @@ const About = () => {
                         business and showcase their expertise.
                     </Text>
                 </View>
+
+                {/* Inspirational Quote */}
+                <View style={styles.quoteSection}>
+                    <Text style={styles.quoteMark}>“</Text>
+                    <Text style={styles.quoteText}>
+                        The best way to find yourself is to lose yourself in the service of others.
+                    </Text>
+                    <Text style={styles.quoteAuthor}>- Mahatma Gandhi</Text>
+                </View>
+
                 {/* Button */}
                 <TouchableOpacity
                     style={styles.contactButton}
@@ -67,6 +77,19 @@ const About = () => {
 };
 
 const styles = StyleSheet.create({
+    missionSection: {
+        marginBottom: 30,
+        backgroundColor: '#f7fafc',
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: '#e3e8ee',
+        padding: 22,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.06,
+        shadowRadius: 4,
+        elevation: 1,
+    },
 
     container: {
         padding: 20,
@@ -144,6 +167,40 @@ const styles = StyleSheet.create({
     logoImage: {
         width: 350,
         height: 350,
+    },
+    quoteSection: {
+        backgroundColor: '#e6f0fa',
+        borderRadius: 16,
+        padding: 22,
+        marginBottom: 32,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.07,
+        shadowRadius: 5,
+        elevation: 1,
+    },
+    quoteMark: {
+        fontSize: 48,
+        color: '#2563eb',
+        fontWeight: 'bold',
+        marginBottom: -18,
+        marginTop: -8,
+    },
+    quoteText: {
+        fontSize: 20,
+        color: '#22223b',
+        fontStyle: 'italic',
+        textAlign: 'center',
+        marginBottom: 10,
+        marginHorizontal: 8,
+        lineHeight: 30,
+    },
+    quoteAuthor: {
+        fontSize: 16,
+        color: '#2563eb',
+        fontWeight: '600',
+        alignSelf: 'flex-end',
     },
 
     sinceBox: {

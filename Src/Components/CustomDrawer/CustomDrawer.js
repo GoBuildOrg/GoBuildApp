@@ -10,7 +10,9 @@ export default function CustomDrawer(props) {
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
+            const {
+                data: { user },
+            } = await supabase.auth.getUser();
             if (!user) return;
 
             const { data, error } = await supabase
@@ -41,7 +43,9 @@ export default function CustomDrawer(props) {
                     <Avatar
                         rounded
                         size={70}
-                        source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
+                        source={{
+                            uri: "https://randomuser.me/api/portraits/men/1.jpg",
+                        }}
                     />
                     <Text style={styles.name}>{userName || "User"}</Text>
                 </View>
@@ -54,7 +58,12 @@ export default function CustomDrawer(props) {
                         style={styles.menuItem}
                         onPress={() => props.navigation.navigate("Contact")}
                     >
-                        <Ionicons name="call-outline" size={22} color="#05C3DD" style={styles.icon} />
+                        <Ionicons
+                            name="call-outline"
+                            size={22}
+                            color="#05C3DD"
+                            style={styles.icon}
+                        />
                         <Text style={styles.menuText}>Contact</Text>
                     </TouchableOpacity>
 
@@ -62,7 +71,12 @@ export default function CustomDrawer(props) {
                         style={styles.menuItem}
                         onPress={() => props.navigation.navigate("About")}
                     >
-                        <Ionicons name="information-circle-outline" size={22} color="#05C3DD" style={styles.icon} />
+                        <Ionicons
+                            name="information-circle-outline"
+                            size={22}
+                            color="#05C3DD"
+                            style={styles.icon}
+                        />
                         <Text style={styles.menuText}>About Us</Text>
                     </TouchableOpacity>
                 </View>
@@ -71,15 +85,23 @@ export default function CustomDrawer(props) {
             {/* Logout Button */}
             <TouchableOpacity
                 style={styles.logoutContainer}
-                onPress={() => {
-                    props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: "onBoarding" }],
-                    });
+                onPress={async () => {
+                    const { error } = await supabase.auth.signOut();
+                    if (error) {
+                        console.log("Logout Error:", error);
+                        return;
+                    }
                 }}
             >
-                <Ionicons name="exit-outline" size={22} color="#FF4D4D" style={styles.icon} />
-                <Text style={[styles.menuText, { color: "#FF4D4D" }]}>Logout</Text>
+                <Ionicons
+                    name="exit-outline"
+                    size={22}
+                    color="#FF4D4D"
+                    style={styles.icon}
+                />
+                <Text style={[styles.menuText, { color: "#FF4D4D" }]}>
+                    Logout
+                </Text>
             </TouchableOpacity>
         </DrawerContentScrollView>
     );
@@ -97,6 +119,12 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         marginTop: 10,
         color: "#333",
+    },
+
+    phone: {
+        fontSize: 14,
+        color: "#666",
+        marginTop: 5,
     },
 
     divider: {
@@ -131,5 +159,4 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: "#ddd",
     },
-
 });

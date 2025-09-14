@@ -15,61 +15,35 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const { width, height } = Dimensions.get("window");
 
-const OnBoardingScreen = ({ navigation }) => {
-    const [name, setName] = useState("");
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
     const [focused, setFocused] = useState({
-        name: false,
         email: false,
-        phone: false,
         password: false,
     });
 
-    const handleRegister = async () => {
-        if (!name || !email || !phone || !password) {
+    const handleLogin = async () => {
+        if (!email || !password) {
             Alert.alert("Error", "Please fill all fields");
             return;
         }
 
         try {
-            // 1. SignUp user
-            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
 
-            if (signUpError) {
-                console.log("Auth SignUp Error:", signUpError);
-                Alert.alert("Error", signUpError.message);
+            if (error) {
+                console.log("Login Error:", error);
+                Alert.alert("Error", error.message);
                 return;
             }
 
-            const user = signUpData?.user;
-            if (!user) {
-                Alert.alert("Error", "User not created. Try again!");
-                return;
-            }
-
-            // 2. Update profile
-            const { error: profileError } = await supabase
-                .from("profiles")
-                .update({
-                    full_name: name,
-                    PhoneNo: phone
-                })
-                .eq("id", user.id);
-
-            if (profileError) {
-                console.log("Profile Update Error:", profileError);
-                Alert.alert("Error", "Profile not updated!");
-                return;
-            }
-
-            Alert.alert("Success", "Registration completed!");
+            Alert.alert("Success", "Logged in successfully!");
             navigation.replace("Home");
         } catch (err) {
             console.log("Unexpected Error:", err);
@@ -95,45 +69,27 @@ const OnBoardingScreen = ({ navigation }) => {
 
                     {/* Form */}
                     <View style={styles.formCard}>
-                        <Text style={styles.formLabel}>Full Name</Text>
-                        <TextInput
-                            style={[styles.input, focused.name && styles.inputFocused]}
-                            placeholder="Enter your Name"
-                            placeholderTextColor="#9CA3AF"
-                            value={name}
-                            onChangeText={setName}
-                            onFocus={() => setFocused({ ...focused, name: true })}
-                            onBlur={() => setFocused({ ...focused, name: false })}
-                        />
-
-                        <Text style={styles.formLabel}>Phone</Text>
-                        <TextInput
-                            style={[styles.input, focused.phone && styles.inputFocused]}
-                            placeholder="Enter your Phone Number"
-                            placeholderTextColor="#9CA3AF"
-                            value={phone}
-                            keyboardType="phone-pad"
-                            maxLength={10}
-                            onChangeText={setPhone}
-                            onFocus={() => setFocused({ ...focused, phone: true })}
-                            onBlur={() => setFocused({ ...focused, phone: false })}
-                        />
-
                         <Text style={styles.formLabel}>Email</Text>
                         <TextInput
-                            style={[styles.input, focused.email && styles.inputFocused]}
+                            style={[
+                                styles.input,
+                                focused.email && styles.inputFocused,
+                            ]}
                             placeholder="Enter your Email"
                             placeholderTextColor="#9CA3AF"
                             value={email}
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onChangeText={setEmail}
-                            onFocus={() => setFocused({ ...focused, email: true })}
-                            onBlur={() => setFocused({ ...focused, email: false })}
+                            onFocus={() =>
+                                setFocused({ ...focused, email: true })
+                            }
+                            onBlur={() =>
+                                setFocused({ ...focused, email: false })
+                            }
                         />
 
                         <Text style={styles.formLabel}>Password</Text>
-
                         <View
                             style={[
                                 styles.input,
@@ -159,11 +115,7 @@ const OnBoardingScreen = ({ navigation }) => {
                                 onPress={() => setShowPassword(!showPassword)}
                             >
                                 <Ionicons
-                                    name={
-                                        showPassword
-                                            ? "eye-outline"
-                                            : "eye-off-outline"
-                                    }
+                                    name={showPassword ? "eye-outline" : "eye-off-outline"}
                                     size={22}
                                     color="#6B7280"
                                 />
@@ -171,20 +123,26 @@ const OnBoardingScreen = ({ navigation }) => {
                         </View>
 
                         {/* Buttons */}
-                        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                            <Text style={styles.buttonText}>Register</Text>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={handleLogin}
+                        >
+                            <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={[styles.button, styles.secondaryButton]}
-                            onPress={() => navigation.navigate("Login")}
+                            onPress={() => navigation.navigate("onBoarding")}
                         >
-                            <Text style={[styles.buttonText, { color: "#2563EB" }]}>
-                                Login
+                            <Text
+                                style={[
+                                    styles.buttonText,
+                                    { color: "#2563EB" },
+                                ]}
+                            >
+                                Register
                             </Text>
-
                         </TouchableOpacity>
-
                     </View>
                 </View>
             </ScrollView>
@@ -192,45 +150,38 @@ const OnBoardingScreen = ({ navigation }) => {
     );
 };
 
-export default OnBoardingScreen;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         alignItems: "center",
         paddingHorizontal: 20,
-        paddingTop: height * 0.06,
+        paddingTop: height * 0.15,
     },
-
     logo: {
         fontSize: width * 0.1,
         fontWeight: "900",
         letterSpacing: 1,
-        marginBottom: 25,
+        marginBottom: 40,
         textAlign: "center",
     },
-
     logoPrimary: {
         color: "#007BFF",
     },
-
     logoAccent: {
         color: "#05C3DD",
     },
-
     formCard: {
         width: "100%",
         padding: 10,
     },
-
     formLabel: {
         fontSize: 14,
         color: "#333",
         marginBottom: 5,
         marginTop: 15,
     },
-
     input: {
         height: 50,
         borderWidth: 1.5,
@@ -239,11 +190,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         fontSize: 14,
     },
-
     inputFocused: {
         borderColor: "#2563EB",
     },
-
     button: {
         backgroundColor: "#2563EB",
         paddingVertical: 16,
@@ -258,19 +207,15 @@ const styles = StyleSheet.create({
         elevation: 3,
         top: 40,
     },
-
     buttonText: {
         color: "#ffffff",
         fontSize: width * 0.045,
         fontWeight: "600",
         textAlign: "center",
     },
-
     secondaryButton: {
         backgroundColor: "#ffffff",
         borderWidth: 1.5,
         borderColor: "#2563EB",
     },
-
-
 });
