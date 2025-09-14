@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 const Footer = () => {
 
     const openLink = async (url) => {
         console.log("Trying to open:", url);
         try {
-            await Linking.openURL(url);  // ✅ Direct open (no canOpenURL)
+            await Linking.openURL(url);
         } catch (err) {
             console.error("Error opening URL:", err);
         }
@@ -45,9 +46,9 @@ const Footer = () => {
 
                 <TouchableOpacity
                     style={styles.iconButton}
-                    onPress={() => openLink("")}
+                    onPress={() => openLink("https://x.com/GoBuildInd")}
                 >
-                    <FontAwesome name="twitter-square" size={28} color="#1DA1F2" />
+                    <FontAwesome6 name="x-twitter" size={28} color="#1DA1F2" />
                 </TouchableOpacity>
             </View>
 

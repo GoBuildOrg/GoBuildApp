@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -10,8 +10,11 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
+import SearchBar from "../SearchBar/SearchBar";
+
 const WorkerService = () => {
     const navigation = useNavigation();
+    const flatListRef = useRef();
 
     const services = [
         {
@@ -84,6 +87,18 @@ const WorkerService = () => {
         </View>
     );
 
+    // Search handler: scroll to card if title matches, else navigate
+    const handleSearch = (query) => {
+        const index = services.findIndex(
+            (item) => item.title.toLowerCase() === query.trim().toLowerCase()
+        );
+        if (index !== -1 && flatListRef.current) {
+            flatListRef.current.scrollToIndex({ index, animated: true });
+        } else {
+            navigation.navigate("Service", { searchQuery: query });
+        }
+    };
+
     return (
         <SafeAreaView style={styles.SafeArea}>
             <View style={styles.Container}>
@@ -95,7 +110,10 @@ const WorkerService = () => {
                     </Text>
                 </View>
 
+                <SearchBar onSearch={handleSearch} />
+
                 <FlatList
+                    ref={flatListRef}
                     data={services}
                     keyExtractor={(item) => item.id}
                     renderItem={renderCard}
