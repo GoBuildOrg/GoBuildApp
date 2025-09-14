@@ -18,16 +18,16 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const SERVICES = [
-    "Carpenter",
-    "Mason",
-    "Helper",
-    "Painter",
-    "Welder",
-    "Labour",
-    "Steel Cutter",
-    "Tiles and Floor Work",
-    "Plumber",
-    "Electrician",
+    "Carpenter - 850rs/day",
+    "Mason - 850rs/day",
+    "Helper - 650rs/day",
+    "Painter - 700rs/day",
+    "Welder - 1200rs/day",
+    "Labour - 650rs/day",
+    "Steel Cutter - 850rs/day",
+    "Tiles and Floor Work - 1000rs/day",
+    "Plumber 1200rs/day",
+    "Electrician 1200rs/day",
 ];
 
 const FIND_US = [
