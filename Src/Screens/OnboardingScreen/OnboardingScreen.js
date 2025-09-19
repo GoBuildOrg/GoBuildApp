@@ -142,7 +142,7 @@ const OnBoardingScreen = ({ navigation }) => {
                             ]}
                         >
                             <TextInput
-                                style={{ flex: 1, fontSize: 14 }}
+                                style={{ flex: 1, fontSize: 14, color: "#000" }}
                                 placeholder="Enter your Password"
                                 placeholderTextColor="#9CA3AF"
                                 value={password}

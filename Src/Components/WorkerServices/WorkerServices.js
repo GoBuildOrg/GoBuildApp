@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+
 import {
     SafeAreaView,
     StyleSheet,
@@ -15,6 +16,8 @@ import SearchBar from "../SearchBar/SearchBar";
 const WorkerService = () => {
     const navigation = useNavigation();
     const flatListRef = useRef();
+    const [searchQuery, setSearchQuery] = useState("");
+
 
     const services = [
         {
@@ -87,17 +90,22 @@ const WorkerService = () => {
         </View>
     );
 
-    // Search handler: scroll to card if title matches, else navigate
-    const handleSearch = (query) => {
-        const index = services.findIndex(
-            (item) => item.title.toLowerCase() === query.trim().toLowerCase()
-        );
-        if (index !== -1 && flatListRef.current) {
-            flatListRef.current.scrollToIndex({ index, animated: true });
-        } else {
-            navigation.navigate("Service", { searchQuery: query });
-        }
-    };
+    // // Search handler: scroll to card if title matches, else navigate
+    // const handleSearch = (query) => {
+    //     const index = services.findIndex(
+    //         (item) => item.title.toLowerCase().includes(query.trim().toLowerCase())
+    //     );
+
+    //     if (index !== -1 && flatListRef.current) {
+    //         flatListRef.current.scrollToIndex({ index, animated: true });
+    //     } else {
+    //         navigation.navigate("Service", { searchQuery: query });
+    //     }
+    // };
+
+    const filteredServices = services.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <SafeAreaView style={styles.SafeArea}>
@@ -110,14 +118,19 @@ const WorkerService = () => {
                     </Text>
                 </View>
 
-                <SearchBar onSearch={handleSearch} />
+                <SearchBar onSearch={(q) => setSearchQuery(q)} />
 
                 <FlatList
                     ref={flatListRef}
-                    data={services}
+                    data={filteredServices}
                     keyExtractor={(item) => item.id}
                     renderItem={renderCard}
                     showsVerticalScrollIndicator={false}
+                // ListEmptyComponent={() => (
+                //     <Text style={{ textAlign: "center", marginTop: 20, color: "#6b7280" }}>
+                //         No services found
+                //     </Text>
+                // )}
                 />
 
                 <TouchableOpacity

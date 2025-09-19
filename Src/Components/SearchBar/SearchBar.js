@@ -44,16 +44,29 @@ const SearchBar = ({ onSearch }) => {
                         style={styles.input}
                         placeholder="Search"
                         value={query}
-                        onChangeText={setQuery}
+                        onChangeText={(text) => {
+                            setQuery(text);
+                            if (onSearch) {
+                                onSearch(text);
+                            }
+                        }}
                         placeholderTextColor="#999"
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                     />
 
                     {query.length > 0 && (
-                        <TouchableOpacity onPress={() => setQuery("")}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setQuery("");
+                                if (onSearch) {
+                                    onSearch("");
+                                }
+                            }}
+                        >
                             <Icon name="close-circle" size={20} color="#777" style={styles.icon} />
                         </TouchableOpacity>
+
                     )}
                 </View>
 
@@ -78,6 +91,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
+
     inputContainer: {
         flex: 1,
         flexDirection: "row",

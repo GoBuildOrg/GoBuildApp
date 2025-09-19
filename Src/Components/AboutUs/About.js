@@ -21,7 +21,7 @@ const About = () => {
                 <View style={styles.missionSection}>
                     <Image
                         source={require("../../Assets/Images/aboutUsImage.png")}
-                        style={styles.logoImage}
+                        style={styles.buildImage}
                         resizeMode="contain"
                     />
                 </View>
@@ -77,6 +77,7 @@ const About = () => {
 };
 
 const styles = StyleSheet.create({
+
     missionSection: {
         marginBottom: 30,
         backgroundColor: '#f7fafc',
@@ -168,6 +169,13 @@ const styles = StyleSheet.create({
         width: 350,
         height: 350,
     },
+
+    buildImage: {
+        width: 350,
+        height: 350,
+        alignSelf: 'center'
+    },
+
     quoteSection: {
         backgroundColor: '#e6f0fa',
         borderRadius: 16,
@@ -180,6 +188,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         elevation: 1,
     },
+
     quoteMark: {
         fontSize: 48,
         color: '#2563eb',
@@ -187,6 +196,7 @@ const styles = StyleSheet.create({
         marginBottom: -18,
         marginTop: -8,
     },
+
     quoteText: {
         fontSize: 20,
         color: '#22223b',
@@ -196,6 +206,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 8,
         lineHeight: 30,
     },
+
     quoteAuthor: {
         fontSize: 16,
         color: '#2563eb',
